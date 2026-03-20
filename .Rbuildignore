@@ -1,0 +1,11 @@
+^.*\.Rproj$
+^\.RDataTmp.*$
+^\.editorconfig$
+^man-roxygen$
+^.*\.RData$
+^.*\.Rhistory$
+^\.Rproj\.user$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+^\.github$
