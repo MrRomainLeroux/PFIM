@@ -185,40 +185,33 @@ cat(paste(lines, collapse = "\n"))
 # print(getDcriterion(evaluationBayesianResults))
 
 ## ----plot-eval-pk, echo = TRUE, eval=FALSE, comment=''----------------------------------------------------------------
-# # plot() is the unified OO entry point — dispatches on class, returns a named list:
-# #   $evaluation         -> nested [["design"]][["arm"]][["outcome"]]
-# #   $sensitivityIndices -> nested [["design"]][["arm"]][["outcome"]][["param"]]
-# #   $SE / $RSE          -> ggplot2 bar charts
-# # which = c(...) selects a subset; omitting it computes all plots for the class.
-# evalPlots = plot(evaluationPopResults,
-#                  plotOptions = plotOptions,
-#                  which       = c("evaluation", "sensitivityIndices", "SE", "RSE"))
-# print(evalPlots$evaluation[["design1"]][["20.00mg Arm"]][["RespPK"]])
+# evalPlots = plotEvaluation(evaluationPopResults, plotOptions)
+# print(evalPlots[["design1"]][["20.00mg Arm"]][["RespPK"]])
 
 ## ----plot-eval-pk_from_figures, echo=FALSE, eval=TRUE, out.width="50%", fig.align="center", fig.cap="PK response profile -- 20.00 mg arm (population FIM)"----
 knitr::include_graphics("figures/vignette1_evaluation_populationFim_design1_arm20mg_RespPK.png")
 
 ## ----plot-eval-pd, echo = TRUE, eval=FALSE,  comment=''---------------------------------------------------------------
-# print(evalPlots$evaluation[["design1"]][["20.00mg Arm"]][["RespPD"]])
+# print(evalPlots[["design1"]][["20.00mg Arm"]][["RespPD"]])
 
 ## ----plot-eval-pd_from_figures, echo = FALSE,  eval=TRUE, out.width="50%",comment='', fig.align = "center", fig.cap="PD response profile -- 20.00 mg arm (population FIM)"----
 knitr::include_graphics("figures/vignette1_evaluation_populationFim_design1_arm20mg_RespPD.png")
 
 ## ----plot-si-cl, echo = TRUE, eval= FALSE,  comment=''----------------------------------------------------------------
-# # $sensitivityIndices is computed in the same plot() call above
-# print(evalPlots$sensitivityIndices[["design1"]][["20.00mg Arm"]][["RespPK"]][["Cl"]])
+# siPlots = plotSensitivityIndices(evaluationPopResults, plotOptions)
+# print(siPlots[["design1"]][["20.00mg Arm"]][["RespPK"]][["Cl"]])
 
 ## ----plot-si-cl_from_figures, echo = FALSE,  eval=TRUE, out.width="50%", comment='', fig.align = "center", fig.cap="Sensitivity index for Cl -- RespPK, 20.00 mg arm"----
 knitr::include_graphics("figures/vignette1_evaluation_populationFim_design1_SI_RespPK_Cl.png")
 
 ## ----plot-se, echo = TRUE, eval= FALSE,   comment=''------------------------------------------------------------------
-# print(evalPlots$SE)
+# print(plotSE(evaluationPopResults))
 
 ## ----plot-se_figures, out.width="33%", echo = FALSE, eval= TRUE,  comment='', fig.align = "center",fig.cap="Standard Errors (SE)"----
 knitr::include_graphics("figures/vignette1_evaluation_populationFim_design1_SE.png")
 
 ## ----plot-rse, fig.width=5, fig.width=15, echo = TRUE, eval= FALSE,  comment=''---------------------------------------
-# print(evalPlots$RSE)
+# print(plotRSE(evaluationPopResults))
 
 ## ----plot-rse_figures, out.width="33%", echo = FALSE, eval= TRUE,  comment='', fig.align = "center",fig.cap="Relative Standard Errors (RSE %)"----
 knitr::include_graphics("figures/vignette1_evaluation_populationFim_design1_RSE.png")
@@ -387,12 +380,7 @@ cat(paste(lines, collapse = "\n"))
 # print(getDcriterion(optimizationMultResults))
 
 ## ----algoMul-show, echo=TRUE, eval=FALSE, comment=''------------------------------------------------------------------
-# # plot() on an Optimization object -- $weights is specific to MultiplicativeAlgorithm:
-# # final weight per candidate protocol; non-zero bars define the design support.
-# plotsMult = plot(optimizationMultResults,
-#                  plotOptions = plotOptions,
-#                  which       = c("evaluation", "SE", "RSE", "weights"))
-# print(plotsMult$weights)
+# plotWeights(optimizationMultResults)
 
 ## ----mult-plot, out.width="50%", echo = FALSE, eval= TRUE,  comment='', fig.align = "center",fig.cap="Standard Errors (SE)"----
 knitr::include_graphics("figures/vignette1_optimization_MultiplicativeAlgorithm_populationFIM_weights.png")

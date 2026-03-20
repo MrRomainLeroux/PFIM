@@ -150,24 +150,18 @@ cat(paste(lines, collapse = "\n"))
 
 ## ----eval-plots, echo = TRUE, eval = FALSE, comment=''----------------------------------------------------------------
 # plotOptions = list(unitTime = "hour", unitOutcomes = "mcg/mL")
-# # plot() is the unified OO entry point -- dispatches on class, returns a named list:
-# #   $evaluation         -> nested [["design"]][["arm"]][["outcome"]]
-# #   $sensitivityIndices -> nested [["design"]][["arm"]][["outcome"]][["param"]]
-# #   $SE / $RSE          -> ggplot2 bar charts
 # # Predicted concentration profile with sampling times overlaid
-# plotsEval = plot(evaluationPopResults,
-#                  plotOptions = plotOptions,
-#                  which       = c("evaluation", "sensitivityIndices", "SE", "RSE"))
-# plotOutcomesRespPK = plotsEval$evaluation[["design1"]][["arm1"]][["RespPK"]]
+# plotEvalResults  = plotEvaluation(evaluationPopResults, plotOptions)
+# plotOutcomesRespPK = plotEvalResults[["design1"]][["arm1"]][["RespPK"]]
 # print(plotOutcomesRespPK)
 
 ## ----plot-eval-pk_from_figures, echo = FALSE,  eval=TRUE, out.width="50%",comment='', fig.align = "center", fig.cap="PK response profile -- arm1 (population FIM)"----
 knitr::include_graphics("figures/vignette2_evaluation_popFim_design1_arm1_RespPK.png")
 
 ## ----eval-plots-si-V-Cl, echo = TRUE, eval = FALSE, comment=''--------------------------------------------------------
-# # $sensitivityIndices is computed in the same plot() call above
-# print(plotsEval$sensitivityIndices[["design1"]][["arm1"]][["RespPK"]][["V"]])
-# print(plotsEval$sensitivityIndices[["design1"]][["arm1"]][["RespPK"]][["Cl"]])
+# plotSensResults = plotSensitivityIndices(evaluationPopResults, plotOptions)
+# print(plotSensResults[["design1"]][["arm1"]][["RespPK"]][["V"]])
+# print(plotSensResults[["design1"]][["arm1"]][["RespPK"]][["Cl"]])
 
 ## ----plot-si-V_from_figures, echo = FALSE,  eval=TRUE, out.width="50%",comment='', fig.align = "center", fig.cap="Sensitivity index for V -- RespPK, arm1"----
 knitr::include_graphics("figures/vignette2_evaluation_popFim_design1_SI_RespPK_V.png")
@@ -176,9 +170,9 @@ knitr::include_graphics("figures/vignette2_evaluation_popFim_design1_SI_RespPK_V
 knitr::include_graphics("figures/vignette2_evaluation_popFim_design1_SI_RespPK_Cl.png")
 
 ## ----plot-se, echo = TRUE, eval= FALSE,   comment=''------------------------------------------------------------------
-# # Standard error and RSE bar charts -- computed in the same plot() call above
-# print(plotsEval$SE)
-# print(plotsEval$RSE)
+# # Standard error and RSE bar charts
+# print(plotSE(evaluationPopResults))
+# print(plotRSE(evaluationPopResults))
 
 ## ----plot-se_figures, out.width="33%", echo = FALSE, eval= TRUE,  comment='', fig.align = "center",fig.cap="Standard Errors (SE)"----
 knitr::include_graphics("figures/vignette2_evaluation_popFim_design1_SE.png")
